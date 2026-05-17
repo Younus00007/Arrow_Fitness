@@ -11,8 +11,6 @@ build/
 # logs
 *.log
 
-# your images folder (IMPORTANT)
-src/transform_images/
 
 # optional (system files)
 .DS_Store
