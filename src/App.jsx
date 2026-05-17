@@ -132,12 +132,25 @@ const PLANS = [
 ];
 
 const TESTIMONIALS = [
-  { name: "Rohit Sharma", role: "Software Engineer", text: "Arrow Fitness changed my life. Lost 18 kg in 5 months with the best trainers I've ever met. The energy here is electric!", rating: 5 },
-  { name: "Divya Nair", role: "Teacher", text: "I was terrified of gyms before. The trainers here made me feel so welcome. Now I squat 80 kg and feel unstoppable!", rating: 5 },
-  { name: "Aakash Patel", role: "Student", text: "Student pricing is a lifesaver. The facilities are top-notch and the community keeps me accountable every single day.", rating: 5 },
-  { name: "Sonia Mehta", role: "Doctor", text: "As a doctor I care about science-backed training. Arrow Fitness trainers understand biomechanics. Zero injuries in 8 months.", rating: 5 },
-  { name: "Farhan Khan", role: "Personal Trainer", text: "I've trained at 12 different gyms. Arrow Fitness equipment and coaching quality is genuinely world-class for the price.", rating: 5 },
-  { name: "Kavitha Rao", role: "Homemaker", text: "Morning batch, flexible schedule, and crèche facility. Arrow Fitness truly cares about every member's life situation.", rating: 5 },
+  { name: "Aneri Amin", role: "Graphic designer", text: "Great experience and friendly approach ..", rating: 5 },
+  { name: "Gym member", role: "Member", text: "Everything is ok about gym.Masters are good in coaching and ambience is very nice.One thing is some of them are talking during session and masters are not minding it", rating: 4 },
+  { name: "Rohith R", role: "Student", text: "Slayyyyyyyyyyyy", rating: 5 },
+  { name: "Kiruthika Shanmugam", role: "VIP master", text: "Will be coming soon… mentally prepared, physically terrified 😂💀", rating: 5 },
+  { name: "Ashwatth", role: "Student", text: "Spacious gym with lot of equipments and friendly coaches who train clients effectively and also.with lor of pateince. Also provide various useful packages for clients. I think it's affordable for me as a student", rating: 5 },
+  { name: "Girijapalanisamy", role: "Student", text: "Best coaches", rating: 5 },
+  { name: "Abina", role: "Student", text: "recently my most peaceful place. I consistently came here without boring. because of good trainer . approaching friendly and modern equipments.. amazing atmosphere. and safety zone for both.. thank you keep rocking", rating: 5 },
+  { name: "Ashik Atron", role: "Optical Business", text: "Best one in the town..Amazing facility and top equipment... highly professional trainers for everyone from beginners to professional athletes to train at...4 trainers❌Four Pillars✅💪", rating: 5 },
+  { name: "Srikanth", role: "Business", text: "Simply best place to workout", rating: 5 },
+  { name: "Charan", role: "FinCrime Analyst", text: "Good and well Maintained. Friendly approch of Gym coaches/tutors. Sufficient of equipment. Nice ambience. Basic utilities are provided (Wash room, water, TV, dressing room, mobile and bag storage racks). Parking facility.", rating: 4 },
+  { name: "Vimalraj D", role: "B.Com Student", text: "The best gyms for everyone, regardless of age or gender, with great support for beginners.", rating: 5 },
+  { name: "Balakavin", role: "Member", text: "Good and nice gym ambience management and gym masters are also very friendly and very positive while entering into gym one of the good gym i find it", rating: 5 },
+  { name: "Saran", role: "Member", text: "That is my favorite gym 💜", rating: 5 },
+  { name: "Vasanth.K", role: "Student", text: "One of the Best Gym In Erode and Budget wise is Economical Then Kindly Trainers and Certified..Feel free to ask workouts and diets..then why think Join Team AFC and start your Fitness Goals..Thank you", rating: 5 },
+  { name: "Nesan", role: "Chef", text: "Actually very professional and friendly trainers. If you have interest or obsession in fitness u r in good hands. My pov is we users have to maintain our shoe racks cus soo crowded other wise kudos to the team", rating: 5 },
+  { name: "Meena karnan", role: "IT professional", text: "Great gym with a motivating environment and highly knowledgeable trainers. The trainers are very supportive, professional, and provide excellent guidance based on individual fitness goals. Their experience and understanding of the fitness industry really stand out. A perfect place for anyone looking to improve their health, strength, and confidence.", rating: 5 },
+  { name: "Arya", role: "Railways", text: "I’ve had such a great experience at this gym. The trainers are extremely supportive, motivating, and always ready to help. The atmosphere feels positive and comfortable, which makes working out so much easier and enjoyable. Especially Coach Basith, who is very encouraging and constantly motivates me to do better. Even though I’m not always consistent with the gym and sometimes take long breaks, I still push myself to come back because the environment here feels so engaging and welcoming. Truly grateful to be part of this place!", rating: 5 },
+  { name: "Elakya (Sweety)", role: "Clinical pharmacist", text: "New to this gym but it’s very good and motivating. The trainer gives a very good training for someone new like me.", rating: 5 },
+  { name: "Dhruv", role: "Student", text: "A top-notch fitness center with an amazing energy. The equipment is well-maintained and the layout is perfect for a focused training session. I'm really impressed with the quality of the facility and highly recommend it to anyone serious about their workouts.", rating: 4 },
 ];
 
 const ACHIEVEMENTS = [
@@ -907,7 +920,7 @@ function Testimonials() {
   const [isExpanded, setIsExpanded] = useState(false);
   const AVATAR_COLORS = ['#FFD700', '#FFC200', '#FFB300', '#FFE066', '#FFD000', '#FFDC00'];
 
-  const displayedTestimonials = isExpanded ? TESTIMONIALS : TESTIMONIALS.slice(0, 2);
+  const displayedTestimonials = isExpanded ? TESTIMONIALS : TESTIMONIALS.slice(0, 3);
 
   return (
     <section id="testimonials" className="py-24 bg-[#0A0A0A] overflow-hidden">
@@ -920,7 +933,7 @@ function Testimonials() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-12 gap-y-24 mt-20 pl-8 pr-4 sm:px-12">
           {displayedTestimonials.map((t, i) => (
             <motion.div key={t.name}
-              initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+              initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: (i % 3) * 0.1 }}
               className="bg-[#1A1A1A] border border-[#2a2a2a] rounded-[30px] p-6 lg:p-8 pt-[90px] lg:pt-[120px] relative flex flex-col h-full card-lift">
               <div className="absolute top-[-40px] lg:top-[-50px] left-[-30px] lg:left-[-50px] rounded-[20px] h-[120px] w-[120px] lg:h-[150px] lg:w-[150px] flex items-center justify-center text-black font-display text-5xl flex-shrink-0 shadow-xl overflow-hidden"
                 style={{ background: AVATAR_COLORS[i % AVATAR_COLORS.length] }}>
@@ -943,7 +956,7 @@ function Testimonials() {
           ))}
         </div>
 
-        {TESTIMONIALS.length > 2 && (
+        {TESTIMONIALS.length > 3 && (
           <motion.div layout className="mt-20 flex justify-center">
             <button
               onClick={() => setIsExpanded(!isExpanded)}
@@ -1154,6 +1167,41 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handler);
   }, []);
 
+  const handleNavClick = (e, href) => {
+    e.preventDefault();
+    setMenuOpen(false); // Close menu instantly
+    
+    const target = document.querySelector(href);
+    if (!target) return;
+
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+    const offsetTop = targetPosition - 80; // 80px fixed header offset
+    const startPosition = window.scrollY;
+    const distance = offsetTop - startPosition;
+    const duration = 450; // Faster, snappier scroll duration
+    let start = null;
+
+    const step = (timestamp) => {
+      if (!start) start = timestamp;
+      const progress = timestamp - start;
+      const easeProgress = Math.min(progress / duration, 1);
+      // easeInOutCubic algorithm for a premium smooth feel
+      const ease = easeProgress < 0.5
+        ? 4 * easeProgress * easeProgress * easeProgress
+        : 1 - Math.pow(-2 * easeProgress + 2, 3) / 2;
+        
+      window.scrollTo(0, startPosition + distance * ease);
+
+      if (progress < duration) {
+        window.requestAnimationFrame(step);
+      } else {
+        window.scrollTo(0, offsetTop);
+      }
+    };
+
+    window.requestAnimationFrame(step);
+  };
+
   const links = [
     { label: 'BMI', href: '#bmi' },
     { label: 'Transformations', href: '#transformations' },
@@ -1169,7 +1217,7 @@ function Navbar() {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/90 backdrop-blur-md border-b border-[#222]' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-        <a href="#" className="flex items-center gap-2 group">
+        <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); setMenuOpen(false); }} className="flex items-center gap-2 group">
           <img src="/d790da5d-40f0-4378-8d05-98fc8b796c51.png" alt="Arrow Fitness Centre Logo" className="w-10 h-10 object-contain" />
           <span className="font-display text-2xl text-white tracking-wider uppercase">Arrow Fitness <span className="text-yellow-400">Centre</span></span>
         </a>
@@ -1177,7 +1225,7 @@ function Navbar() {
         {/* Desktop links */}
         <div className="hidden md:flex items-center gap-6">
           {links.map(l => (
-            <a key={l.label} href={l.href}
+            <a key={l.label} href={l.href} onClick={(e) => handleNavClick(e, l.href)}
               className="text-gray-400 hover:text-yellow-400 text-sm font-medium transition-colors">{l.label}</a>
           ))}
           <div className="flex items-center gap-4 ml-2 border-l border-[#333] pl-4">
@@ -1189,7 +1237,7 @@ function Navbar() {
                 <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.414 0 .018 5.393 0 12.03c0 2.122.54 4.194 1.564 6.027L0 24l6.12-1.605a11.81 11.81 0 005.926 1.583h.005c6.635 0 12.03-5.391 12.033-12.029a11.785 11.785 0 00-3.57-8.528z" />
               </svg>
             </a>
-            <a href="#pricing" className="bg-yellow-400 text-black px-5 py-2 rounded-lg text-sm font-bold hover:bg-yellow-300 transition-colors">
+            <a href="#pricing" onClick={(e) => handleNavClick(e, '#pricing')} className="bg-yellow-400 text-black px-5 py-2 rounded-lg text-sm font-bold hover:bg-yellow-300 transition-colors">
               Join Now
             </a>
           </div>
@@ -1208,7 +1256,7 @@ function Navbar() {
             className="md:hidden bg-black/95 border-t border-[#222] overflow-hidden">
             <div className="px-4 py-4 flex flex-col gap-4">
               {links.map(l => (
-                <a key={l.label} href={l.href} onClick={() => setMenuOpen(false)}
+                <a key={l.label} href={l.href} onClick={(e) => handleNavClick(e, l.href)}
                   className="text-gray-300 hover:text-yellow-400 font-medium transition-colors py-1">{l.label}</a>
               ))}
               <div className="flex items-center gap-4 pt-2">
@@ -1221,7 +1269,7 @@ function Navbar() {
                   <Instagram className="w-5 h-5" />
                 </a>
               </div>
-              <a href="#pricing" onClick={() => setMenuOpen(false)}
+              <a href="#pricing" onClick={(e) => handleNavClick(e, '#pricing')}
                 className="bg-yellow-400 text-black px-5 py-3 rounded-lg text-sm font-bold text-center mt-2">
                 Join Now
               </a>
