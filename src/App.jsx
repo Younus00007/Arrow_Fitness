@@ -4,7 +4,7 @@ import {
   Trophy, Users, Star, Zap, Shield, Award,
   ChevronDown, ArrowRight, Dumbbell, Target,
   Flame, Heart, Clock, CheckCircle, Menu, X,
-  TrendingUp, Medal, Instagram, MapPin, Phone
+  TrendingUp, Medal, Instagram, MapPin, Phone, Utensils
 } from 'lucide-react';
 
 // Transformation Images
@@ -14,6 +14,9 @@ import transform2Left from './transform_images/transform_2(left).jpeg';
 import transform2Right from './transform_images/transform_2(right).jpeg';
 import transform3Left from './transform_images/transform_3(left).jpeg';
 import transform3Right from './transform_images/transform_3(right).jpeg';
+
+import coachBasith from './Coach_images/Basith.jpeg';
+import coachSabarikanth from './Coach_images/Sabarikanth.jpeg';
 
 // ─────────────────────────────────────────────
 // DATA
@@ -174,36 +177,38 @@ const GALLERY_IMAGES = [
 const COACHES = [
   {
     id: 1,
-    name: "Vikram 'The Beast' Rathore",
-    role: "Head Coach & Founder",
-    specialty: "Bodybuilding & Transformation",
-    experience: "12+ Years Experience",
-    bio: "Certified master trainer with a passion for pushing limits and achieving the impossible.",
-    awards: ["National Pro 2019", "Best Transformation Coach 2022"]
+    name: "Senthil Kumar",
+    role: "Head Coach",
+    specialty: "Senior and active national bodybuilder of Erode district since 2006",
+    experience: "20+ Years Experience",
+    bio: "Senior and active national bodybuilder of Erode district since 2006",
+
   },
   {
     id: 2,
-    name: "Anjali Sharma",
-    role: "Strength Specialist",
-    specialty: "Powerlifting & Core Strength",
+    name: "Basith",
+    role: "Health & Wellness Coach ",
+    specialty: "Certified lifestyle and fitness coach",
     experience: "7 Years Experience",
-    bio: "Focused on functional strength and building a bulletproof core."
+    bio: "Certified Lifestyle & Fitness Coach helping people transform their body and mindset through fitness, nutrition, and healthy habits. Dedicated to building strength, confidence, and long-term wellness",
+    image: coachBasith
   },
   {
     id: 3,
-    name: "Marcus Jones",
-    role: "CrossFit Lead",
+    name: "Sabarikanth",
+    role: "Coach",
     specialty: "High-Intensity Functional Training",
-    experience: "5 Years Experience",
-    bio: "Helping members find their athletic potential through dynamic movement."
+    experience: "8 Years Experience",
+    bio: "Former National Bodybuilder | Bodybuilding & Fitness Coach Specializing in Muscle Building, Fat Loss, Strength Training & Physique Transformation 💪",
+    image: coachSabarikanth
   },
   {
     id: 4,
-    name: "Sarah Miller",
-    role: "Yoga & Mobility",
+    name: "Sankar",
+    role: "Coach",
     specialty: "Mind-Body Wellness",
     experience: "8 Years Experience",
-    bio: "Specializing in recovery, flexibility, and sustainable fitness lifestyles."
+    bio: "Fitness Coach | Helping people achieve their health and fitness goals through proper training, discipline, and healthy lifestyle guidance 💪."
   },
 ];
 
@@ -213,7 +218,6 @@ const COACHES = [
 function CustomCursor() {
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-
   useEffect(() => {
     const updateMousePosition = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
     const updateHoverState = (e) => {
@@ -258,28 +262,14 @@ function CustomCursor() {
 }
 
 function TiltCard({ children, className, ...props }) {
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [10, -10]);
-  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
-
-  const handleMouseMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    x.set(e.clientX - rect.left - rect.width / 2);
-    y.set(e.clientY - rect.top - rect.height / 2);
-  };
-
   return (
     <motion.div
-      style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={() => { x.set(0); y.set(0); }}
-      whileHover={{ scale: 1.02 }}
-      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+      whileHover={{ y: -5 }}
+      transition={{ duration: 0.3 }}
       className={`relative ${className}`}
       {...props}
     >
-      <div style={{ transform: "translateZ(20px)" }} className="relative h-full z-10 w-full flex flex-col">
+      <div className="relative h-full z-10 w-full flex flex-col">
         {children}
       </div>
       {/* Dynamic Glass Highlight */}
@@ -517,6 +507,90 @@ function TransformCard({ t }) {
 }
 
 // ─────────────────────────────────────────────
+// MEMBERSHIP EXCLUSIVES SECTION
+// ─────────────────────────────────────────────
+function MembershipExclusives() {
+  const EXCLUSIVES = [
+    { icon: Utensils, title: "Diet Plan", desc: "Customized nutrition protocols tailored to your specific goals and body type." },
+    { icon: Dumbbell, title: "Workout Plan", desc: "Science-based training regimens designed for maximum muscle growth and fat loss." },
+    { icon: Heart, title: "Lifestyle Consultations", desc: "Holistic guidance on sleep, recovery, and daily habits for optimal well-being." },
+    { icon: Flame, title: "Bodybuilding Consultations", desc: "Expert advice on prep, posing, and advanced hypertrophy techniques." },
+    { icon: Shield, title: "Supplement Guidance", desc: "Honest, effective recommendations for sports nutrition and vital health supplements." },
+  ];
+
+  return (
+    <section className="py-24 bg-[#111] relative overflow-hidden border-t border-white/5">
+      {/* Background accents */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-yellow-400/5 to-transparent pointer-events-none" />
+      <div className="absolute -left-32 top-1/2 -translate-y-1/2 w-96 h-96 bg-yellow-400/10 blur-[120px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 relative z-10">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
+          
+          {/* Left Text Content */}
+          <div className="lg:w-1/3 space-y-6 text-center lg:text-left">
+            <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <div className="inline-block bg-yellow-400/10 border border-yellow-400/20 px-4 py-1.5 rounded-full mb-6">
+                <span className="text-yellow-400 font-bold text-xs uppercase tracking-widest flex items-center gap-2">
+                  <Star className="w-3.5 h-3.5 fill-yellow-400" />
+                  Premium Perks
+                </span>
+              </div>
+              <h2 className="font-display text-5xl md:text-6xl text-white leading-tight">
+                MEMBERSHIP <br/>
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">EXCLUSIVES</span>
+              </h2>
+              <p className="text-gray-400 mt-6 text-lg leading-relaxed">
+                When you join Arrow Fitness, you get more than just access to equipment. You get a complete transformation toolkit.
+              </p>
+              
+              <div className="mt-8 p-6 bg-yellow-400 rounded-2xl relative overflow-hidden group hover:scale-[1.02] transition-transform shadow-[0_0_40px_rgba(255,215,0,0.2)]">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.4),transparent_50%)]" />
+                <div className="relative z-10 flex items-center justify-center lg:justify-start gap-4">
+                  <div className="bg-black text-yellow-400 font-black text-2xl px-4 py-2 rounded-xl uppercase tracking-widest rotate-[-5deg] shadow-lg">
+                    FREE!!!
+                  </div>
+                  <p className="text-black font-bold text-sm uppercase tracking-widest leading-snug">
+                    Included with all <br/> membership plans
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Right Grid Content */}
+          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+            {EXCLUSIVES.map((item, idx) => (
+              <motion.div 
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }} 
+                whileInView={{ opacity: 1, y: 0 }} 
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1 }}
+                className={idx === EXCLUSIVES.length - 1 ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""}
+              >
+                <TiltCard className="bg-[#1A1A1A] border border-[#2a2a2a] rounded-2xl p-6 hover:border-yellow-400/50 transition-colors group h-full">
+                  <div className="flex items-start gap-5">
+                    <div className="w-12 h-12 rounded-xl bg-yellow-400/10 flex items-center justify-center shrink-0 group-hover:scale-110 group-hover:bg-yellow-400 transition-all duration-300">
+                      <item.icon className="w-6 h-6 text-yellow-400 group-hover:text-black transition-colors duration-300" />
+                    </div>
+                    <div>
+                      <h3 className="text-white font-bold text-lg mb-2 group-hover:text-yellow-400 transition-colors">{item.title}</h3>
+                      <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                </TiltCard>
+              </motion.div>
+            ))}
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─────────────────────────────────────────────
 // PRICING SECTION
 // ─────────────────────────────────────────────
 function Pricing({ setSelectedPlan }) {
@@ -580,8 +654,8 @@ function Pricing({ setSelectedPlan }) {
 
                 <div className="mb-6">
                   <p className={`font-display text-xl mb-3 ${plan.popular ? 'text-black' : 'text-yellow-400'}`}>{plan.label}</p>
-                  <div className="flex flex-col gap-1 h-14 justify-center">
-                    <div className="flex items-baseline gap-2 overflow-hidden">
+                  <div className="flex flex-col gap-1 min-h-[4rem] justify-center">
+                    <div className="flex items-baseline gap-2 overflow-visible py-1">
                       <AnimatePresence mode="wait">
                         <motion.span
                           key={currentPrice}
@@ -647,18 +721,30 @@ function Pricing({ setSelectedPlan }) {
         </div>
 
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} transition={{ delay: 0.5 }}
-          className="mt-16 flex flex-col md:flex-row items-center justify-center gap-8 py-8 border-t border-[#1a1a1a]">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-400">
-              <Target className="w-5 h-5" />
+          className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 py-8 border-t border-[#1a1a1a] max-w-4xl mx-auto">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 shrink-0 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-400">
+              <Target className="w-6 h-6" />
             </div>
-            <p className="text-gray-500 text-sm max-w-[200px]">Valid student ID required for student plans.</p>
+            <p className="text-gray-500 text-sm leading-snug">Valid student ID required for student plans.</p>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-400">
-              <Heart className="w-5 h-5" />
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 shrink-0 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-400">
+              <Heart className="w-6 h-6" />
             </div>
-            <p className="text-gray-500 text-sm max-w-[200px]">Couple plans apply to any two members.</p>
+            <p className="text-gray-500 text-sm leading-snug">Couple plans are applicable for one male and one female only — can be friends, cousins, siblings, parent & child, couples, or partners.</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 shrink-0 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-400">
+              <Clock className="w-6 h-6" />
+            </div>
+            <p className="text-gray-500 text-sm leading-snug">No session and timing restriction.</p>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 shrink-0 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-400">
+              <Zap className="w-6 h-6" />
+            </div>
+            <p className="text-gray-500 text-sm leading-snug">Exclusive 1 day fee is available for as low as ₹100.</p>
           </div>
         </motion.div>
       </div>
@@ -753,35 +839,19 @@ function Coaches() {
               <div className="p-8 lg:p-16 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="bg-yellow-400 text-black text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest shadow-lg shadow-yellow-400/20">Featured</span>
-                  <span className="text-gray-500 text-xs font-bold uppercase tracking-widest">{featuredCoach.experience}</span>
+                  <span className="text-yellow-400 font-bold text-[10px] uppercase tracking-widest border border-yellow-400/20 px-2 py-0.5 rounded-md bg-yellow-400/5">{featuredCoach.experience}</span>
                 </div>
                 <h3 className="text-white font-display text-4xl lg:text-6xl mb-4 group-hover:text-yellow-400 transition-colors">{featuredCoach.name}</h3>
                 <p className="text-yellow-400 font-bold text-xl mb-6">{featuredCoach.role}</p>
                 <p className="text-gray-400 text-lg leading-relaxed mb-8 max-w-lg italic font-medium">"{featuredCoach.bio}"</p>
 
-                <div className="grid sm:grid-cols-2 gap-6 mb-10">
-                  <div>
-                    <h4 className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Specialization</h4>
-                    <p className="text-white font-bold">{featuredCoach.specialty}</p>
-                  </div>
-                  <div>
-                    <h4 className="text-white/40 text-[10px] font-black uppercase tracking-[0.2em] mb-3">Signature Awards</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {featuredCoach.awards.map(award => (
-                        <span key={award} className="text-gray-300 text-xs py-1 px-3 border border-white/10 rounded-lg bg-white/5">{award}</span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-6 mt-4">
                   <button className="flex items-center gap-2 text-yellow-400 font-bold uppercase tracking-widest hover:gap-4 transition-all">
                     <span>Trainer Bio</span>
                     <ArrowRight className="w-5 h-5" />
                   </button>
                   <div className="flex gap-4 border-l border-white/10 pl-6">
                     <Instagram className="w-5 h-5 text-gray-500 hover:text-yellow-400 cursor-pointer transition-colors" />
-                    <Award className="w-5 h-5 text-gray-500 hover:text-yellow-400 cursor-pointer transition-colors" />
                   </div>
                 </div>
               </div>
@@ -801,16 +871,22 @@ function Coaches() {
             >
               <TiltCard className="bg-[#1A1A1A] border border-white/5 rounded-[2rem] overflow-hidden group hover:border-yellow-400/30 transition-all h-full">
                 <div className="relative p-6 flex flex-col h-full">
-                  {/* Compact Placeholder Slot */}
                   <div className="aspect-[4/3] bg-[#0d0d0d] rounded-2xl mb-6 flex flex-col items-center justify-center border border-white/5 relative overflow-hidden group-hover:border-yellow-400/20 transition-colors">
-                    <Users className="w-12 h-12 text-white/5 group-hover:text-yellow-400/20 transition-all duration-500" />
-                    <span className="text-[10px] text-gray-600 font-bold uppercase tracking-[0.2em] mt-2 group-hover:text-yellow-400/40">Avatar Space</span>
+                    {coach.image ? (
+                      <img src={coach.image} alt={coach.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                    ) : (
+                      <>
+                        <Users className="w-12 h-12 text-white/5 group-hover:text-yellow-400/20 transition-all duration-500" />
+                        <span className="text-[10px] text-gray-600 font-bold uppercase tracking-[0.2em] mt-2 group-hover:text-yellow-400/40">Avatar Space</span>
+                      </>
+                    )}
                   </div>
 
                   <div className="flex-1">
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-yellow-400 font-bold text-[10px] uppercase tracking-widest border border-yellow-400/20 px-2 py-0.5 rounded-md bg-yellow-400/5">{coach.specialty.split(' ')[0]}</span>
-                      <span className="text-gray-600 font-bold text-[10px] uppercase tracking-widest">{coach.experience.split(' ')[0]} Yrs Exp</span>
+                    <div className="flex items-center mb-4">
+                      <span className="text-yellow-400 font-bold text-[10px] uppercase tracking-widest border border-yellow-400/20 px-2 py-0.5 rounded-md bg-yellow-400/5">
+                        {coach.experience}
+                      </span>
                     </div>
                     <h3 className="text-white font-display text-2xl mb-1 group-hover:text-yellow-400 transition-colors">{coach.name}</h3>
                     <p className="text-gray-500 text-sm mb-4 font-medium uppercase tracking-wider">{coach.role}</p>
@@ -820,7 +896,6 @@ function Coaches() {
                   <div className="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
                     <div className="flex gap-3">
                       <Instagram className="w-4 h-4 text-gray-600 hover:text-yellow-400 cursor-pointer" />
-                      <Trophy className="w-4 h-4 text-gray-600 hover:text-yellow-400 cursor-pointer" />
                     </div>
                     <button className="text-yellow-400/60 hover:text-yellow-400 transition-colors p-2 bg-yellow-400/5 rounded-full group-hover:scale-110">
                       <Zap className="w-4 h-4" />
@@ -1170,7 +1245,7 @@ function Navbar() {
   const handleNavClick = (e, href) => {
     e.preventDefault();
     setMenuOpen(false); // Close menu instantly
-    
+
     const target = document.querySelector(href);
     if (!target) return;
 
@@ -1189,7 +1264,7 @@ function Navbar() {
       const ease = easeProgress < 0.5
         ? 4 * easeProgress * easeProgress * easeProgress
         : 1 - Math.pow(-2 * easeProgress + 2, 3) / 2;
-        
+
       window.scrollTo(0, startPosition + distance * ease);
 
       if (progress < duration) {
@@ -1619,7 +1694,7 @@ function Footer() {
               </a>
               <div className="flex items-center gap-1.5 text-gray-500 text-xs">
                 <Phone className="w-4 h-4" />
-                <span>+91 8754761799</span>
+                <span>+91 8148587871</span>
               </div>
               <a href="https://wa.me/918148587871" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="text-gray-500 hover:text-green-500 transition-colors sm:ml-2">
                 <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
@@ -1642,9 +1717,8 @@ function Footer() {
           <div>
             <p className="text-yellow-400 font-bold text-sm uppercase tracking-widest mb-4">Hours</p>
             <ul className="space-y-2 text-gray-500 text-sm">
-              <li>Mon – Fri: <span className="text-white">5:00 AM – 11:00 PM</span></li>
-              <li>Saturday: <span className="text-white">5:00 AM – 10:00 PM</span></li>
-              <li>Sunday: <span className="text-white">7:00 AM – 8:00 PM</span></li>
+              <li>Mon – Sat : <span className="text-white">5:00 AM – 10:00 PM</span></li>
+              <li>Sunday: <span className="text-white"> Holiday </span></li>
             </ul>
           </div>
         </div>
@@ -1670,6 +1744,7 @@ export default function App() {
       <Hero />
       <BMICalculator />
       <TransformationMarquee />
+      <MembershipExclusives />
       <Pricing setSelectedPlan={setSelectedPlan} />
       <Achievements />
       <Coaches />
