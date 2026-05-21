@@ -17,6 +17,7 @@ import transform3Right from './transform_images/transform_3(right).jpeg';
 
 import coachBasith from './Coach_images/Basith.jpeg';
 import coachSabarikanth from './Coach_images/Sabarikanth.jpeg';
+import coachSenthil from './Coach_images/senthil.png';
 
 // ─────────────────────────────────────────────
 // DATA
@@ -158,11 +159,11 @@ const TESTIMONIALS = [
 
 const ACHIEVEMENTS = [
   { icon: Trophy, value: "3x", label: "Best Gym Award", sub: "City Fitness Awards 2022–24" },
-  { icon: Users, value: "2,400+", label: "Active Members", sub: "And growing every month" },
-  { icon: Medal, value: "4", label: "Certified Trainers", sub: "NASM & ACE certified" },
-  { icon: TrendingUp, value: "98%", label: "Retention Rate", sub: "Members who stay and grow" },
-  { icon: Star, value: "4.9★", label: "Google Rating", sub: "Based on 840+ reviews" },
-  { icon: Flame, value: "5 Yrs", label: "Of Excellence", sub: "Est. 2020, Arrow Fitness" },
+  { icon: Users, value: "1,200+", label: "Active Members", sub: "And growing every month" },
+  { icon: Medal, value: "4", label: "Well Experienced Trainers" },
+  { icon: TrendingUp, value: "88%", label: "Retention Rate", sub: "Members who stay and grow" },
+  { icon: Star, value: "4.9★", label: "Google Rating", sub: "Based on 35+ reviews" },
+  { icon: Flame, value: "15 Yrs", label: "Of Excellence", sub: "Est. 2020, Arrow Fitness" },
 ];
 
 const GALLERY_IMAGES = [
@@ -182,7 +183,7 @@ const COACHES = [
     specialty: "Senior and active national bodybuilder of Erode district since 2006",
     experience: "20+ Years Experience",
     bio: "Senior and active national bodybuilder of Erode district since 2006",
-
+    image: coachSenthil
   },
   {
     id: 2,
@@ -515,7 +516,6 @@ function MembershipExclusives() {
     { icon: Dumbbell, title: "Workout Plan", desc: "Science-based training regimens designed for maximum muscle growth and fat loss." },
     { icon: Heart, title: "Lifestyle Consultations", desc: "Holistic guidance on sleep, recovery, and daily habits for optimal well-being." },
     { icon: Flame, title: "Bodybuilding Consultations", desc: "Expert advice on prep, posing, and advanced hypertrophy techniques." },
-    { icon: Shield, title: "Supplement Guidance", desc: "Honest, effective recommendations for sports nutrition and vital health supplements." },
   ];
 
   return (
@@ -567,7 +567,6 @@ function MembershipExclusives() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className={idx === EXCLUSIVES.length - 1 ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""}
               >
                 <TiltCard className="bg-[#1A1A1A] border border-[#2a2a2a] rounded-2xl p-6 hover:border-yellow-400/50 transition-colors group h-full">
                   <div className="flex items-start gap-5">
@@ -764,7 +763,7 @@ function Achievements() {
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-16">
           <p className="text-yellow-400 font-display tracking-widest text-lg mb-2">WHY US</p>
           <h2 className="font-display text-5xl md:text-7xl text-white">GYM ACHIEVEMENTS</h2>
-          <p className="text-gray-400 max-w-xl mx-auto mt-4">Five years of relentless dedication, award-winning coaching, and thousands of lives transformed.</p>
+          <p className="text-gray-400 max-w-xl mx-auto mt-4"> Former Arrow gym since 2011 is uplifted and now as Arrow Fitness Centre - Unisex AC since 2022 </p>
         </motion.div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
           {ACHIEVEMENTS.map((a, i) => (
@@ -818,21 +817,31 @@ function Coaches() {
         >
           <TiltCard className="w-full bg-[#1A1A1A] border border-yellow-400/20 rounded-[2.5rem] overflow-hidden group hover:border-yellow-400/50 transition-all shadow-3xl">
             <div className="grid lg:grid-cols-2 gap-0">
-              {/* Placeholder for Head Coach */}
-              <div className="h-[400px] lg:h-[500px] bg-[#0A0A0A] flex flex-col items-center justify-center p-12 text-center relative overflow-hidden group">
-                <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                <div className="w-32 h-32 rounded-full bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center mb-8 relative z-10">
-                  <Award className="w-16 h-16 text-yellow-400/40 group-hover:text-yellow-400 transition-all duration-500 scale-110" />
-                </div>
-                <div className="relative z-10">
-                  <p className="text-yellow-400/60 font-bold text-xs uppercase tracking-[0.4em] mb-4">Master Trainer Slot</p>
-                  <h3 className="text-white font-display text-3xl lg:text-4xl mb-2">Photo Ready</h3>
-                  <div className="w-12 h-1 bg-yellow-400 mx-auto rounded-full" />
-                </div>
-
-                {/* Decorative mesh */}
-                <div className="absolute inset-0 opacity-10 pointer-events-none"
-                  style={{ backgroundImage: 'radial-gradient(#FFD700 0.5px, transparent 0.5px)', backgroundSize: '20px 20px' }} />
+              {/* Head Coach Image */}
+              <div className="h-[400px] lg:h-[500px] bg-[#0A0A0A] relative overflow-hidden group">
+                {featuredCoach.image ? (
+                  <img 
+                    src={featuredCoach.image} 
+                    alt={featuredCoach.name} 
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
+                  />
+                ) : (
+                  <div className="flex flex-col items-center justify-center h-full p-12 text-center relative">
+                    <div className="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                    <div className="w-32 h-32 rounded-full bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center mb-8 relative z-10">
+                      <Award className="w-16 h-16 text-yellow-400/40 group-hover:text-yellow-400 transition-all duration-500 scale-110" />
+                    </div>
+                    <div className="relative z-10">
+                      <p className="text-yellow-400/60 font-bold text-xs uppercase tracking-[0.4em] mb-4">Master Trainer Slot</p>
+                      <h3 className="text-white font-display text-3xl lg:text-4xl mb-2">Photo Ready</h3>
+                      <div className="w-12 h-1 bg-yellow-400 mx-auto rounded-full" />
+                    </div>
+                    {/* Decorative mesh */}
+                    <div className="absolute inset-0 opacity-10 pointer-events-none"
+                      style={{ backgroundImage: 'radial-gradient(#FFD700 0.5px, transparent 0.5px)', backgroundSize: '20px 20px' }} />
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-transparent to-transparent opacity-60 pointer-events-none" />
               </div>
 
               {/* Content for Head Coach */}
@@ -932,7 +941,7 @@ function Gallery() {
             <p className="text-yellow-400 font-display tracking-widest text-lg mb-2">OUR FACILITY</p>
             <h2 className="font-display text-5xl md:text-7xl text-white">PHOTO GALLERY</h2>
           </div>
-          <p className="text-gray-400 max-w-sm">Take a virtual tour of our premium training zones and state-of-the-art recovery spaces.</p>
+          <p className="text-gray-400 max-w-md">Take a virtual tour of our premium training zones and state-of-the-art recovery spaces. Entire gym premises are monitored with CCTV to ensure clients’ safety and comfort.</p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -1684,8 +1693,8 @@ function Footer() {
               <img src="/d790da5d-40f0-4378-8d05-98fc8b796c51.png" alt="Arrow Fitness Centre Logo" className="w-10 h-10 object-contain" />
               <span className="font-display text-2xl text-white tracking-wider uppercase">Arrow Fitness <span className="text-yellow-400">Centre</span></span>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed max-w-xs">
-              Premium gym experience with certified trainers, state-of-the-art equipment, and a community that never quits.
+            <p className="text-gray-500 text-sm leading-relaxed max-w-md">
+              Premium gym experience with certified trainers, state-of-the-art equipment, and a community that never quits. Gym wears are available, and all types of fitness and sports nutritional supplements are available inside the gym.
             </p>
             <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-4 mt-6">
               <a href="https://maps.app.goo.gl/YWPuNAePnDTrF6t16" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-gray-500 hover:text-yellow-400 text-xs transition-colors">
