@@ -10,6 +10,7 @@
   }
 
   html {
+    font-size: 95%;
     scroll-behavior: smooth;
     scroll-padding-top: 80px;
   }

@@ -526,7 +526,7 @@ function MembershipExclusives() {
 
       <div className="max-w-7xl mx-auto px-4 relative z-10">
         <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-center">
-          
+
           {/* Left Text Content */}
           <div className="lg:w-1/3 space-y-6 text-center lg:text-left">
             <motion.div initial={{ opacity: 0, x: -40 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
@@ -537,13 +537,13 @@ function MembershipExclusives() {
                 </span>
               </div>
               <h2 className="font-display text-5xl md:text-6xl text-white leading-tight">
-                MEMBERSHIP <br/>
+                MEMBERSHIP <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-200">EXCLUSIVES</span>
               </h2>
               <p className="text-gray-400 mt-6 text-lg leading-relaxed">
                 When you join Arrow Fitness, you get more than just access to equipment. You get a complete transformation toolkit.
               </p>
-              
+
               <div className="mt-8 p-6 bg-yellow-400 rounded-2xl relative overflow-hidden group hover:scale-[1.02] transition-transform shadow-[0_0_40px_rgba(255,215,0,0.2)]">
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(255,255,255,0.4),transparent_50%)]" />
                 <div className="relative z-10 flex items-center justify-center lg:justify-start gap-4">
@@ -551,7 +551,7 @@ function MembershipExclusives() {
                     FREE!!!
                   </div>
                   <p className="text-black font-bold text-sm uppercase tracking-widest leading-snug">
-                    Included with all <br/> membership plans
+                    Included with all <br /> membership plans
                   </p>
                 </div>
               </div>
@@ -561,10 +561,10 @@ function MembershipExclusives() {
           {/* Right Grid Content */}
           <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
             {EXCLUSIVES.map((item, idx) => (
-              <motion.div 
+              <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }} 
-                whileInView={{ opacity: 1, y: 0 }} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
                 className={idx === EXCLUSIVES.length - 1 ? "md:col-span-2 md:w-1/2 md:mx-auto" : ""}
@@ -1496,7 +1496,7 @@ function Hero() {
               {/* Left side: Stats Stack */}
               <div className="lg:col-span-4 flex flex-col justify-between gap-8 border-b lg:border-b-0 lg:border-r border-white/10 pb-8 lg:pb-0 lg:pr-8">
                 {[
-                  { v: '2,400+', l: 'MEMBERS', icon: <Users className="w-6 h-6 text-yellow-400" /> },
+                  { v: '1,200+', l: 'MEMBERS', icon: <Users className="w-6 h-6 text-yellow-400" /> },
                   { v: '4', l: 'EXPERT TRAINERS', icon: <Award className="w-6 h-6 text-yellow-400" /> },
                   { v: '4.9★', l: 'GOOGLE RATING', icon: <Star className="w-6 h-6 text-yellow-400 fill-yellow-400" /> },
                 ].map((s, idx) => (
