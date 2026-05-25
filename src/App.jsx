@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion';
+import { motion, AnimatePresence, useScroll, useTransform, useMotionValue, useSpring, useAnimationFrame } from 'framer-motion';
 import {
   Trophy, Users, Star, Zap, Shield, Award,
   ChevronDown, ArrowRight, Dumbbell, Target,
@@ -18,6 +18,8 @@ import transform3Right from './transform_images/transform_3(right).jpeg';
 import coachBasith from './Coach_images/Basith.jpeg';
 import coachSabarikanth from './Coach_images/Sabarikanth.jpeg';
 import coachSenthil from './Coach_images/senthil.png';
+import coachSankar from './Coach_images/sankar.jpeg';
+import { image } from 'framer-motion/client';
 
 // ─────────────────────────────────────────────
 // DATA
@@ -200,7 +202,7 @@ const COACHES = [
     role: "Coach",
     specialty: "High-Intensity Functional Training",
     experience: "8 Years Experience",
-    bio: "Former National Bodybuilder | Bodybuilding & Fitness Coach Specializing in Muscle Building, Fat Loss, Strength Training & Physique Transformation 💪",
+    bio: "Former National Bodybuilder | Bodybuilding & Fitness Coach",
     image: coachSabarikanth
   },
   {
@@ -209,7 +211,8 @@ const COACHES = [
     role: "Coach",
     specialty: "Mind-Body Wellness",
     experience: "8 Years Experience",
-    bio: "Fitness Coach | Helping people achieve their health and fitness goals through proper training, discipline, and healthy lifestyle guidance 💪."
+    bio: "Fitness Coach | Helping people achieve their health and fitness goals through proper training, discipline, and healthy lifestyle guidance 💪.",
+    image: coachSankar
   },
 ];
 
@@ -439,20 +442,85 @@ function BMICalculator() {
 // ─────────────────────────────────────────────
 function TransformationMarquee() {
   const doubled = [...TRANSFORMATIONS, ...TRANSFORMATIONS];
+  const trackRef = useRef(null);
+  const [baseWidth, setBaseWidth] = useState(0);
+  const x = useMotionValue(0);
+  const speed = useRef(1.2); // Default moves left to right (positive speed)
+  const isDragging = useRef(false);
+  const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    if (!trackRef.current) return;
+    const updateWidth = () => {
+      setBaseWidth(trackRef.current.scrollWidth / 2);
+    };
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
+  useAnimationFrame((time, delta) => {
+    if (isDragging.current || isHovered || !baseWidth) return;
+
+    // Adjust scroll speed according to delta for smooth 60fps independent movement
+    const currentSpeed = speed.current * (delta / 16.67);
+    let currentX = x.get() + currentSpeed;
+
+    // Wrap position
+    if (currentX < -baseWidth) {
+      currentX += baseWidth;
+    } else if (currentX > 0) {
+      currentX -= baseWidth;
+    }
+    x.set(currentX);
+  });
+
   return (
-    <section id="transformations" className="py-24 bg-[#111] overflow-hidden">
+    <section id="transformations" className="py-24 bg-[#111] overflow-hidden select-none">
       <div className="max-w-7xl mx-auto px-4 mb-12">
         <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <p className="text-yellow-400 font-display tracking-widest text-lg mb-2">REAL RESULTS</p>
           <h2 className="font-display text-5xl md:text-7xl text-white">TRANSFORMATIONS</h2>
         </motion.div>
       </div>
-      <div className="relative overflow-hidden">
-        <div className="marquee-track">
+      <div 
+        className="relative overflow-hidden cursor-grab active:cursor-grabbing"
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        <motion.div
+          ref={trackRef}
+          className="flex w-max"
+          style={{ x }}
+          drag="x"
+          dragMomentum={false}
+          onDragStart={() => {
+            isDragging.current = true;
+          }}
+          onDragEnd={(event, info) => {
+            isDragging.current = false;
+            
+            // Wrap the value of x when drag ends
+            if (baseWidth) {
+              let finalX = x.get();
+              const remainder = finalX % baseWidth;
+              x.set(remainder > 0 ? remainder - baseWidth : remainder);
+            }
+
+            // Adjust speed direction based on swipe velocity
+            // If user swiped left (info.velocity.x < -20), cards go left (speed becomes negative)
+            // If user swiped right (info.velocity.x > 20), cards go right (speed becomes positive)
+            if (info.velocity.x < -20) {
+              speed.current = -1.2;
+            } else if (info.velocity.x > 20) {
+              speed.current = 1.2;
+            }
+          }}
+        >
           {doubled.map((t, i) => (
             <TransformCard key={i} t={t} />
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
@@ -791,6 +859,7 @@ function Achievements() {
 function Coaches() {
   const featuredCoach = COACHES[0];
   const teamCoaches = COACHES.slice(1);
+  const [expandedCoachId, setExpandedCoachId] = useState(null);
 
   return (
     <section id="coaches" className="py-24 bg-[#111] relative overflow-hidden">
@@ -820,10 +889,10 @@ function Coaches() {
               {/* Head Coach Image */}
               <div className="h-[400px] lg:h-[500px] bg-[#0A0A0A] relative overflow-hidden group">
                 {featuredCoach.image ? (
-                  <img 
-                    src={featuredCoach.image} 
-                    alt={featuredCoach.name} 
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" 
+                  <img
+                    src={featuredCoach.image}
+                    alt={featuredCoach.name}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700"
                   />
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full p-12 text-center relative">
@@ -878,7 +947,10 @@ function Coaches() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <TiltCard className="bg-[#1A1A1A] border border-white/5 rounded-[2rem] overflow-hidden group hover:border-yellow-400/30 transition-all h-full">
+              <TiltCard
+                onClick={() => setExpandedCoachId(expandedCoachId === coach.id ? null : coach.id)}
+                className="bg-[#1A1A1A] border border-white/5 rounded-[2rem] overflow-hidden group hover:border-yellow-400/30 transition-all h-full cursor-pointer select-none"
+              >
                 <div className="relative p-6 flex flex-col h-full">
                   <div className="aspect-[4/3] bg-[#0d0d0d] rounded-2xl mb-6 flex flex-col items-center justify-center border border-white/5 relative overflow-hidden group-hover:border-yellow-400/20 transition-colors">
                     {coach.image ? (
@@ -899,14 +971,26 @@ function Coaches() {
                     </div>
                     <h3 className="text-white font-display text-2xl mb-1 group-hover:text-yellow-400 transition-colors">{coach.name}</h3>
                     <p className="text-gray-500 text-sm mb-4 font-medium uppercase tracking-wider">{coach.role}</p>
-                    <p className="text-gray-400 text-xs leading-relaxed line-clamp-2">{coach.bio}</p>
+                    <p className={`text-gray-400 text-xs leading-relaxed transition-all duration-300 ${expandedCoachId === coach.id ? '' : 'line-clamp-2'}`}>
+                      {coach.bio}
+                    </p>
+                    <span className="text-[10px] text-yellow-400/80 font-bold uppercase tracking-wider mt-2.5 inline-flex items-center gap-1.5 group-hover:text-yellow-400 transition-colors">
+                      {expandedCoachId === coach.id ? 'Show Less' : 'Read Full Bio'}
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-300 ${expandedCoachId === coach.id ? 'rotate-180' : ''}`} />
+                    </span>
                   </div>
 
                   <div className="mt-6 pt-6 border-t border-white/5 flex items-center justify-between">
-                    <div className="flex gap-3">
+                    <div className="flex gap-3" onClick={(e) => e.stopPropagation()}>
                       <Instagram className="w-4 h-4 text-gray-600 hover:text-yellow-400 cursor-pointer" />
                     </div>
-                    <button className="text-yellow-400/60 hover:text-yellow-400 transition-colors p-2 bg-yellow-400/5 rounded-full group-hover:scale-110">
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setExpandedCoachId(expandedCoachId === coach.id ? null : coach.id);
+                      }}
+                      className="text-yellow-400/60 hover:text-yellow-400 transition-colors p-2 bg-yellow-400/5 rounded-full group-hover:scale-110"
+                    >
                       <Zap className="w-4 h-4" />
                     </button>
                   </div>
