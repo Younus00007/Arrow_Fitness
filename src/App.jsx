@@ -19,7 +19,16 @@ import coachBasith from './Coach_images/Basith.jpeg';
 import coachSabarikanth from './Coach_images/Sabarikanth.jpeg';
 import coachSenthil from './Coach_images/senthil.png';
 import coachSankar from './Coach_images/sankar.jpeg';
-import { image } from 'framer-motion/client';
+
+// Gym Gallery Images
+import GymEntranceLeft from './Gym_images/Gym_entrance_left.jpeg';
+import GymEntranceRight from './Gym_images/gym_entrance_right.jpeg';
+import GymCardio from './Gym_images/cardio.jpeg';
+import GymChestWorkout from './Gym_images/chestworkout.jpeg';
+import GymDumbelImages from './Gym_images/dumbel_images.jpeg';
+import GymImage7 from './Gym_images/image7.jpeg';
+import GymPullWorkout from './Gym_images/pull_workout_images.jpeg';
+import GymPullWorkout2 from './Gym_images/pull_workout_imges_2.jpeg';
 
 // ─────────────────────────────────────────────
 // DATA
@@ -169,12 +178,14 @@ const ACHIEVEMENTS = [
 ];
 
 const GALLERY_IMAGES = [
-  { id: 1, title: "Cardio Zone", category: "Facility" },
-  { id: 2, title: "Weight Area", category: "Strength" },
-  { id: 3, title: "Yoga Studio", category: "Wellness" },
-  { id: 4, title: "CrossFit Zone", category: "Performance" },
-  { id: 5, title: "Locker Rooms", category: "Premium" },
-  { id: 6, title: "Nutrition Bar", category: "Lifestyle" },
+  { id: 1, title: "Gym Entrance Left", category: "Entrance", image: GymEntranceLeft },
+  { id: 2, title: "Cardio Zone", category: "Cardio", image: GymCardio },
+  { id: 3, title: "Chest Workout Area", category: "Strength", image: GymChestWorkout },
+  { id: 4, title: "Free Weights Zone", category: "Weights", image: GymDumbelImages },
+  { id: 5, title: "Gym Entrance Right", category: "Entrance", image: GymEntranceRight },
+  { id: 6, title: "Premium Strength Area", category: "Strength", image: GymImage7 },
+  { id: 7, title: "Pull Workout Station", category: "Training", image: GymPullWorkout },
+  { id: 8, title: "Advanced Training Zone", category: "Performance", image: GymPullWorkout2 },
 ];
 
 const COACHES = [
@@ -192,25 +203,25 @@ const COACHES = [
     name: "Basith",
     role: "Health & Wellness Coach ",
     specialty: "Certified lifestyle and fitness coach",
-    experience: "7 Years Experience",
+    experience: "15 Years Experience",
     bio: "Certified Lifestyle & Fitness Coach helping people transform their body and mindset through fitness, nutrition, and healthy habits. Dedicated to building strength, confidence, and long-term wellness",
     image: coachBasith
   },
   {
     id: 3,
     name: "Sabarikanth",
-    role: "Coach",
+    role: "Fitness and BodyBuilding Coach",
     specialty: "High-Intensity Functional Training",
-    experience: "8 Years Experience",
+    experience: "15 Years Experience",
     bio: "Former National Bodybuilder | Bodybuilding & Fitness Coach",
     image: coachSabarikanth
   },
   {
     id: 4,
     name: "Sankar",
-    role: "Coach",
+    role: "Fitness and BodyBuilding Coach",
     specialty: "Mind-Body Wellness",
-    experience: "8 Years Experience",
+    experience: "15 Years Experience",
     bio: "Fitness Coach | Helping people achieve their health and fitness goals through proper training, discipline, and healthy lifestyle guidance 💪.",
     image: coachSankar
   },
@@ -483,7 +494,7 @@ function TransformationMarquee() {
           <h2 className="font-display text-5xl md:text-7xl text-white">TRANSFORMATIONS</h2>
         </motion.div>
       </div>
-      <div 
+      <div
         className="relative overflow-hidden cursor-grab active:cursor-grabbing"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -499,7 +510,7 @@ function TransformationMarquee() {
           }}
           onDragEnd={(event, info) => {
             isDragging.current = false;
-            
+
             // Wrap the value of x when drag ends
             if (baseWidth) {
               let finalX = x.get();
@@ -1008,6 +1019,8 @@ function Coaches() {
 // GALLERY SECTION
 // ─────────────────────────────────────────────
 function Gallery() {
+  const [activeImage, setActiveImage] = useState(null);
+
   return (
     <section id="gallery" className="py-24 bg-[#0A0A0A] relative overflow-hidden">
       {/* Background decoration */}
@@ -1037,23 +1050,45 @@ function Gallery() {
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
             >
-              <TiltCard className="aspect-square bg-[#1A1A1A] border border-[#2a2a2a] rounded-[2rem] overflow-hidden group cursor-pointer hover:border-yellow-400/50 transition-all shadow-2xl">
-                <div className="relative h-full w-full flex flex-col items-center justify-center p-8 text-center bg-gradient-to-br from-white/[0.02] to-transparent">
-                  {/* Glassmorphic Placeholder */}
-                  <div className="w-20 h-20 rounded-3xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                    <Star className="w-8 h-8 text-yellow-400/40 group-hover:text-yellow-400 transition-colors" />
-                  </div>
+              <TiltCard
+                onClick={() => setActiveImage(img)}
+                className="aspect-square bg-[#1A1A1A] border border-[#2a2a2a] rounded-[2rem] overflow-hidden group cursor-pointer hover:border-yellow-400/50 transition-all shadow-2xl relative"
+              >
+                <div className="relative h-full w-full flex flex-col justify-end p-8 text-left">
+                  {img.image ? (
+                    <>
+                      {/* Background Image */}
+                      <img
+                        src={img.image}
+                        alt={img.title}
+                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      />
+                      {/* Gradient Overlay for Text Readability */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-85 group-hover:opacity-95 transition-opacity duration-500" />
+                    </>
+                  ) : (
+                    <>
+                      {/* Glassmorphic Placeholder */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
+                        <div className="w-20 h-20 rounded-3xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                          <Star className="w-8 h-8 text-yellow-400/40 group-hover:text-yellow-400 transition-colors" />
+                        </div>
+                      </div>
+                    </>
+                  )}
 
+                  {/* Text Details */}
                   <div className="relative z-10">
-                    <span className="text-yellow-400/60 font-bold text-[10px] uppercase tracking-[0.3em] mb-2 block">{img.category}</span>
+                    <span className="text-yellow-400/80 font-bold text-[10px] uppercase tracking-[0.3em] mb-2 block">{img.category}</span>
                     <h3 className="text-white font-display text-2xl group-hover:text-yellow-400 transition-colors">{img.title}</h3>
                   </div>
 
-                  {/* Empty state overlay */}
-                  <div className="absolute inset-x-8 bottom-8 py-4 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <span className="text-gray-500 text-xs font-semibold uppercase tracking-widest flex items-center justify-center gap-2">
+                  {/* View action overlay */}
+                  <div className="absolute inset-x-8 bottom-8 py-4 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
+                    <span className="text-gray-400 text-xs font-semibold uppercase tracking-widest flex items-center justify-start gap-2">
                       <Zap className="w-3 h-3 text-yellow-400" />
-                      Image slot ready
+                      View Image
                     </span>
                   </div>
 
@@ -1077,6 +1112,75 @@ function Gallery() {
           </p>
         </motion.div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {activeImage && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setActiveImage(null)}
+            className="fixed inset-0 bg-black/95 z-[999] flex flex-col items-center justify-center p-4 backdrop-blur-md cursor-zoom-out"
+          >
+            {/* Close Button */}
+            <button
+              onClick={() => setActiveImage(null)}
+              className="absolute top-6 right-6 text-white/70 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors z-[1000]"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Modal Content container */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              onClick={(e) => e.stopPropagation()}
+              className="relative max-w-5xl w-full flex flex-col md:flex-row bg-[#151515] border border-white/10 rounded-[2rem] overflow-hidden shadow-2xl cursor-default"
+            >
+              {/* Image Column */}
+              <div className="md:w-2/3 aspect-video md:aspect-auto md:h-[70vh] bg-black relative flex items-center justify-center overflow-hidden">
+                <img
+                  src={activeImage.image}
+                  alt={activeImage.title}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+
+              {/* Info Column */}
+              <div className="md:w-1/3 p-8 md:p-10 flex flex-col justify-between bg-[#111] relative overflow-hidden">
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,rgba(255,215,0,0.03),transparent_60%)] pointer-events-none" />
+                <div className="relative z-10 space-y-6">
+                  <div>
+                    <span className="text-yellow-400 font-bold text-xs uppercase tracking-[0.3em] mb-3 block">
+                      {activeImage.category}
+                    </span>
+                    <h3 className="text-white font-display text-3xl md:text-4xl leading-tight">
+                      {activeImage.title}
+                    </h3>
+                  </div>
+                  <div className="h-px bg-white/10 w-full" />
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Experience state-of-the-art training environments at Arrow Fitness Centre. Designed to push limits and inspire physical greatness.
+                  </p>
+                </div>
+
+                <div className="relative z-10 pt-8 mt-8 border-t border-white/5 flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-yellow-400/10 flex items-center justify-center text-yellow-400 shrink-0">
+                    <Dumbbell className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-white font-bold text-sm">Arrow Fitness Centre</p>
+                    <p className="text-gray-500 text-xs">Unleash Your Potential</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
