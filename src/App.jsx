@@ -210,10 +210,10 @@ const COACHES = [
   {
     id: 3,
     name: "Sabarikanth",
-    role: "Fitness and BodyBuilding Coach",
+    role: "Certified Fitness Coach",
     specialty: "High-Intensity Functional Training",
     experience: "15 Years Experience",
-    bio: "Former National Bodybuilder | Bodybuilding & Fitness Coach | Helping people achieve their health and fitness goals through proper training, discipline, and healthy lifestyle guidance 💪.",
+    bio: "Certified Fitness Coach | Former National Bodybuilder | Helping people achieve their health and fitness goals through proper training, discipline, and healthy lifestyle guidance 💪.",
     image: coachSabarikanth
   },
   {
