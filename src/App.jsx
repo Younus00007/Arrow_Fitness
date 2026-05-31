@@ -213,7 +213,7 @@ const COACHES = [
     role: "Fitness and BodyBuilding Coach",
     specialty: "High-Intensity Functional Training",
     experience: "15 Years Experience",
-    bio: "Former National Bodybuilder | Bodybuilding & Fitness Coach",
+    bio: "Former National Bodybuilder | Bodybuilding & Fitness Coach | Helping people achieve their health and fitness goals through proper training, discipline, and healthy lifestyle guidance 💪.",
     image: coachSabarikanth
   },
   {
@@ -711,7 +711,7 @@ function Pricing({ setSelectedPlan }) {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" style={{ perspective: 1500 }}>
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6" style={{ perspective: 1500 }}>
           {PLANS.map((plan, i) => {
             const currentPrice = plan.prices[tier];
             const originalNormalPrice = plan.prices.normal;
@@ -720,19 +720,19 @@ function Pricing({ setSelectedPlan }) {
             return (
               <TiltCard key={plan.label}
                 initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className={`rounded-[1.75rem] p-6 flex flex-col h-full border transition-all duration-500 ${plan.popular
+                className={`rounded-[1.25rem] sm:rounded-[1.75rem] p-4 sm:p-6 flex flex-col h-full border transition-all duration-500 ${plan.popular
                   ? 'bg-yellow-400 text-black border-yellow-400 shadow-[0_20px_50px_rgba(255,215,0,0.15)]'
                   : 'bg-[#1A1A1A] border-[#2a2a2a] text-white hover:border-yellow-400/30'}`}>
 
                 {plan.popular && (
-                  <div className="absolute -top-3.5 left-1/2 -track-x-1/2 bg-black text-yellow-400 text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-[0.2em] border border-yellow-400 shadow-xl" style={{ transform: 'translateX(-50%)' }}>
+                  <div className="absolute -top-3.5 left-1/2 bg-black text-yellow-400 text-[8px] sm:text-[9px] font-black px-2 sm:px-3 py-1 rounded-full uppercase tracking-[0.15em] sm:tracking-[0.2em] border border-yellow-400 shadow-xl transform -translate-x-1/2">
                     Recommended
                   </div>
                 )}
 
-                <div className="mb-6">
-                  <p className={`font-display text-xl mb-3 ${plan.popular ? 'text-black' : 'text-yellow-400'}`}>{plan.label}</p>
-                  <div className="flex flex-col gap-1 min-h-[4rem] justify-center">
+                <div className="mb-4 sm:mb-6">
+                  <p className={`font-display text-lg sm:text-xl mb-2 sm:mb-3 ${plan.popular ? 'text-black' : 'text-yellow-400'}`}>{plan.label}</p>
+                  <div className="flex flex-col gap-1 min-h-[3rem] sm:min-h-[4rem] justify-center">
                     <div className="flex items-baseline gap-2 overflow-visible py-1">
                       <AnimatePresence mode="wait">
                         <motion.span
@@ -741,7 +741,7 @@ function Pricing({ setSelectedPlan }) {
                           animate={{ opacity: 1, y: 0 }}
                           exit={{ opacity: 0, y: -10 }}
                           transition={{ duration: 0.2 }}
-                          className="font-display text-4xl"
+                          className="font-display text-2xl sm:text-4xl"
                         >
                           ₹{currentPrice.toLocaleString('en-IN')}
                         </motion.span>
@@ -754,12 +754,12 @@ function Pricing({ setSelectedPlan }) {
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 10 }}
-                            className="flex items-center gap-2"
+                            className="flex items-center gap-1.5 sm:gap-2"
                           >
-                            <span className={`text-xs line-through ${plan.popular ? 'text-black/40' : 'text-gray-500'}`}>
+                            <span className={`text-[10px] sm:text-xs line-through ${plan.popular ? 'text-black/40' : 'text-gray-500'}`}>
                               ₹{originalNormalPrice.toLocaleString('en-IN')}
                             </span>
-                            <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded ${plan.popular ? 'bg-black/10 text-black' : 'bg-yellow-400/10 text-yellow-400'}`}>
+                            <span className={`text-[8px] sm:text-[9px] font-bold px-1 sm:px-1.5 py-0.5 rounded ${plan.popular ? 'bg-black/10 text-black' : 'bg-yellow-400/10 text-yellow-400'}`}>
                               SAVE ₹{(originalNormalPrice - currentPrice).toLocaleString('en-IN')}
                             </span>
                           </motion.div>
@@ -769,13 +769,13 @@ function Pricing({ setSelectedPlan }) {
                   </div>
                 </div>
 
-                <div className={`h-px w-full mb-6 ${plan.popular ? 'bg-black/10' : 'bg-[#2a2a2a]'}`} />
+                <div className={`h-px w-full mb-4 sm:mb-6 ${plan.popular ? 'bg-black/10' : 'bg-[#2a2a2a]'}`} />
 
-                <ul className="space-y-3 flex-1">
+                <ul className="space-y-2 sm:space-y-3 flex-1">
                   {plan.perks.map(perk => (
-                    <li key={perk} className="flex items-start gap-2.5 text-xs">
-                      <div className={`mt-0.5 p-0.5 rounded-full ${plan.popular ? 'bg-black/10' : 'bg-yellow-400/10'}`}>
-                        <CheckCircle className={`w-3 h-3 ${plan.popular ? 'text-black' : 'text-yellow-400'}`} />
+                    <li key={perk} className="flex items-start gap-1.5 sm:gap-2.5 text-[10px] sm:text-xs">
+                      <div className={`mt-0.5 p-0.5 rounded-full shrink-0 ${plan.popular ? 'bg-black/10' : 'bg-yellow-400/10'}`}>
+                        <CheckCircle className={`w-2.5 h-2.5 sm:w-3 sm:h-3 ${plan.popular ? 'text-black' : 'text-yellow-400'}`} />
                       </div>
                       <span className={`leading-snug ${plan.popular ? 'text-black/80' : 'text-gray-300'}`}>{perk}</span>
                     </li>
@@ -788,7 +788,7 @@ function Pricing({ setSelectedPlan }) {
                     setSelectedPlan(planName);
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
                   }}
-                  className={`mt-8 w-full py-3.5 rounded-xl font-black text-[10px] uppercase tracking-[0.2em] transition-all duration-300 ${plan.popular
+                  className={`mt-6 sm:mt-8 w-full py-2.5 sm:py-3.5 rounded-lg sm:rounded-xl font-black text-[8px] sm:text-[10px] uppercase tracking-[0.1em] sm:tracking-[0.2em] transition-all duration-300 ${plan.popular
                     ? 'bg-black text-yellow-400 hover:scale-[1.02] shadow-lg'
                     : 'bg-yellow-400 text-black hover:bg-yellow-300 hover:scale-[1.02] shadow-lg shadow-yellow-400/5'}`}>
                   Select Plan
@@ -1041,7 +1041,7 @@ function Gallery() {
           <p className="text-gray-400 max-w-md">Take a virtual tour of our premium training zones and state-of-the-art recovery spaces. Entire gym premises are monitored with CCTV to ensure clients’ safety and comfort.</p>
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
           {GALLERY_IMAGES.map((img, i) => (
             <motion.div
               key={img.id}
@@ -1052,9 +1052,9 @@ function Gallery() {
             >
               <TiltCard
                 onClick={() => setActiveImage(img)}
-                className="aspect-square bg-[#1A1A1A] border border-[#2a2a2a] rounded-[2rem] overflow-hidden group cursor-pointer hover:border-yellow-400/50 transition-all shadow-2xl relative"
+                className="aspect-square bg-[#1A1A1A] border border-[#2a2a2a] rounded-xl sm:rounded-[2rem] overflow-hidden group cursor-pointer hover:border-yellow-400/50 transition-all shadow-2xl relative"
               >
-                <div className="relative h-full w-full flex flex-col justify-end p-8 text-left">
+                <div className="relative h-full w-full flex flex-col justify-end p-4 sm:p-8 text-left">
                   {img.image ? (
                     <>
                       {/* Background Image */}
@@ -1070,9 +1070,9 @@ function Gallery() {
                     <>
                       {/* Glassmorphic Placeholder */}
                       <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] to-transparent" />
-                      <div className="absolute inset-0 flex flex-col items-center justify-center p-8 text-center">
-                        <div className="w-20 h-20 rounded-3xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                          <Star className="w-8 h-8 text-yellow-400/40 group-hover:text-yellow-400 transition-colors" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-center p-4 sm:p-8 text-center">
+                        <div className="w-12 h-12 sm:w-20 sm:h-20 rounded-2xl sm:rounded-3xl bg-yellow-400/10 border border-yellow-400/20 flex items-center justify-center mb-3 sm:mb-6 group-hover:scale-110 transition-transform duration-500">
+                          <Star className="w-6 h-6 sm:w-8 sm:h-8 text-yellow-400/40 group-hover:text-yellow-400 transition-colors" />
                         </div>
                       </div>
                     </>
@@ -1080,13 +1080,13 @@ function Gallery() {
 
                   {/* Text Details */}
                   <div className="relative z-10">
-                    <span className="text-yellow-400/80 font-bold text-[10px] uppercase tracking-[0.3em] mb-2 block">{img.category}</span>
-                    <h3 className="text-white font-display text-2xl group-hover:text-yellow-400 transition-colors">{img.title}</h3>
+                    <span className="text-yellow-400/80 font-bold text-[8px] sm:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] mb-1 sm:mb-2 block">{img.category}</span>
+                    <h3 className="text-white font-display text-sm sm:text-base md:text-2xl group-hover:text-yellow-400 transition-colors line-clamp-2">{img.title}</h3>
                   </div>
 
                   {/* View action overlay */}
-                  <div className="absolute inset-x-8 bottom-8 py-4 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10">
-                    <span className="text-gray-400 text-xs font-semibold uppercase tracking-widest flex items-center justify-start gap-2">
+                  <div className="absolute inset-x-4 sm:inset-x-8 bottom-4 sm:bottom-8 py-2 sm:py-4 border-t border-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-10 hidden sm:flex">
+                    <span className="text-gray-400 text-[10px] sm:text-xs font-semibold uppercase tracking-widest flex items-center justify-start gap-2">
                       <Zap className="w-3 h-3 text-yellow-400" />
                       View Image
                     </span>
@@ -1914,7 +1914,7 @@ function Footer() {
           <div>
             <p className="text-yellow-400 font-bold text-sm uppercase tracking-widest mb-4">Hours</p>
             <ul className="space-y-2 text-gray-500 text-sm">
-              <li>Mon – Sat : <span className="text-white">5:00 AM – 10:00 PM</span></li>
+              <li>Mon – Sat : <span className="text-white">5:30 AM – 10:00 PM</span></li>
               <li>Sunday: <span className="text-white"> Holiday </span></li>
             </ul>
           </div>
