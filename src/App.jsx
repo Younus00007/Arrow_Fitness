@@ -8,27 +8,31 @@ import {
 } from 'lucide-react';
 
 // Transformation Images
-import transform1Left from './transform_images/transform_1(left).jpeg';
-import transform1Right from './transform_images/transform_1(right).jpeg';
-import transform2Left from './transform_images/transform_2(left).jpeg';
-import transform2Right from './transform_images/transform_2(right).jpeg';
-import transform3Left from './transform_images/transform_3(left).jpeg';
-import transform3Right from './transform_images/transform_3(right).jpeg';
+import transform1Left from './transform_images/transform_1(left).webp';
+import transform1Right from './transform_images/transform_1(right).webp';
+import transform2Left from './transform_images/transform_2(left).webp';
+import transform2Right from './transform_images/transform_2(right).webp';
+import transform3Left from './transform_images/transform_3(left).webp';
+import transform3Right from './transform_images/transform_3(right).webp';
+import transform4Left from './transform_images/transform_4(left).webp';
+import transform4Right from './transform_images/transform_4(right).webp';
+import transform5Left from './transform_images/transform_5(left).webp';
+import transform5Right from './transform_images/transform_5(right).webp';
 
-import coachBasith from './Coach_images/Basith.jpeg';
-import coachSabarikanth from './Coach_images/Sabarikanth.jpeg';
-import coachSenthil from './Coach_images/senthil.png';
-import coachSankar from './Coach_images/sankar.jpeg';
+import coachBasith from './Coach_images/Basith.webp';
+import coachSabarikanth from './Coach_images/Sabarikanth.webp';
+import coachSenthil from './Coach_images/senthil.webp';
+import coachSankar from './Coach_images/sankar.webp';
 
 // Gym Gallery Images
-import GymEntranceLeft from './Gym_images/Gym_entrance_left.jpeg';
-import GymEntranceRight from './Gym_images/gym_entrance_right.jpeg';
-import GymCardio from './Gym_images/cardio.jpeg';
-import GymChestWorkout from './Gym_images/chestworkout.jpeg';
-import GymDumbelImages from './Gym_images/dumbel_images.jpeg';
-import GymImage7 from './Gym_images/image7.jpeg';
-import GymPullWorkout from './Gym_images/pull_workout_images.jpeg';
-import GymPullWorkout2 from './Gym_images/pull_workout_imges_2.jpeg';
+import GymEntranceLeft from './Gym_images/Gym_entrance_left.webp';
+import GymEntranceRight from './Gym_images/gym_entrance_right.webp';
+import GymCardio from './Gym_images/cardio.webp';
+import GymChestWorkout from './Gym_images/chestworkout.webp';
+import GymDumbelImages from './Gym_images/dumbel_images.webp';
+import GymImage7 from './Gym_images/image7.webp';
+import GymPullWorkout from './Gym_images/pull_workout_images.webp';
+import GymPullWorkout2 from './Gym_images/pull_workout_imges_2.webp';
 
 // ─────────────────────────────────────────────
 // DATA
@@ -112,8 +116,22 @@ const TRANSFORMATIONS = [
     beforeImg: transform3Left,
     afterImg: transform3Right
   },
-  { name: "Sneha K.", months: 5, kgLost: 18, label: "Unfit → Toned" },
-  { name: "Vikram T.", months: 3, kgLost: 10, label: "Soft → Shredded" },
+  {
+    name: "Sneha K.",
+    months: 5,
+    kgLost: 18,
+    label: "Unfit → Toned",
+    beforeImg: transform4Left,
+    afterImg: transform4Right
+  },
+  {
+    name: "Vikram T.",
+    months: 3,
+    kgLost: 10,
+    label: "Soft → Shredded",
+    beforeImg: transform5Left,
+    afterImg: transform5Right
+  },
   { name: "Ananya P.", months: 7, kgLost: 20, label: "Lazy → Lean" },
   { name: "Karan D.", months: 6, kgLost: 24, label: "Bulky → Built" },
   { name: "Meera L.", months: 5, kgLost: 16, label: "Weak → Warrior" },
@@ -201,7 +219,7 @@ const COACHES = [
   {
     id: 2,
     name: "Basith",
-    role: "Health & Wellness Coach ",
+    role: "Certified Health & Wellness Coach",
     specialty: "Certified lifestyle and fitness coach",
     experience: "15 Years Experience",
     bio: "Certified Lifestyle & Fitness Coach helping people transform their body and mindset through fitness, nutrition, and healthy habits. Dedicated to building strength, confidence, and long-term wellness",
@@ -228,53 +246,9 @@ const COACHES = [
 ];
 
 // ─────────────────────────────────────────────
-// CUSTOM CURSOR & TILT CARD (INTERACTIVE UI)
+// TILT CARD (INTERACTIVE UI)
 // ─────────────────────────────────────────────
-function CustomCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
-  useEffect(() => {
-    const updateMousePosition = (e) => setMousePosition({ x: e.clientX, y: e.clientY });
-    const updateHoverState = (e) => {
-      const target = e.target;
-      if (target.closest('a, button, input, select, textarea, canvas, .interactive')) {
-        setIsHovering(true);
-      } else {
-        setIsHovering(false);
-      }
-    };
-    window.addEventListener('mousemove', updateMousePosition);
-    window.addEventListener('mouseover', updateHoverState);
-    return () => {
-      window.removeEventListener('mousemove', updateMousePosition);
-      window.removeEventListener('mouseover', updateHoverState);
-    };
-  }, []);
 
-  return (
-    <>
-      <motion.div
-        className="fixed top-0 left-0 w-10 h-10 rounded-full border border-yellow-400 pointer-events-none z-[100] mix-blend-difference hidden md:flex items-center justify-center transform"
-        animate={{
-          x: mousePosition.x - 20,
-          y: mousePosition.y - 20,
-          scale: isHovering ? 1.5 : 1,
-          backgroundColor: isHovering ? 'rgba(255,215,0,0.8)' : 'rgba(255,215,0,0)'
-        }}
-        transition={{ type: 'spring', stiffness: 150, damping: 15, mass: 0.1 }}
-      />
-      <motion.div
-        className="fixed top-0 left-0 w-2 h-2 rounded-full bg-yellow-400 pointer-events-none z-[100] hidden md:block transform mix-blend-difference"
-        animate={{
-          x: mousePosition.x - 4,
-          y: mousePosition.y - 4,
-          scale: isHovering ? 0 : 1
-        }}
-        transition={{ type: 'tween', ease: 'linear', duration: 0 }}
-      />
-    </>
-  );
-}
 
 function TiltCard({ children, className, ...props }) {
   return (
@@ -544,7 +518,7 @@ function TransformCard({ t }) {
         {/* Before */}
         <div className="flex-1 relative overflow-hidden">
           {t.beforeImg ? (
-            <img src={t.beforeImg} alt="Before" className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+            <img src={t.beforeImg} alt="Before" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           ) : (
             <div className="h-full bg-[#222] flex items-center justify-center">
               <span className="text-2xl grayscale opacity-20">😞</span>
@@ -560,7 +534,7 @@ function TransformCard({ t }) {
         {/* After */}
         <div className="flex-1 relative overflow-hidden">
           {t.afterImg ? (
-            <img src={t.afterImg} alt="After" className="w-full h-full object-contain transition-transform duration-700 group-hover:scale-105" />
+            <img src={t.afterImg} alt="After" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
           ) : (
             <div className="h-full bg-[#2a2a2a] flex items-center justify-center">
               <span className="text-2xl grayscale opacity-20">💪</span>
@@ -691,12 +665,12 @@ function Pricing({ setSelectedPlan }) {
           </div>
 
           {/* 3-Way Tier Selector */}
-          <div className="bg-[#1A1A1A] p-1.5 rounded-2xl flex border border-[#2a2a2a] relative">
+          <div className="bg-[#1A1A1A] p-1.5 rounded-2xl flex border border-[#2a2a2a] relative w-full max-w-md mx-auto md:w-auto md:mx-0">
             {tiers.map((t) => (
               <button
                 key={t.id}
                 onClick={() => setTier(t.id)}
-                className={`relative px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-widest transition-colors duration-300 min-w-[110px] ${tier === t.id ? 'text-black' : 'text-gray-500 hover:text-gray-300'}`}
+                className={`relative flex-1 px-4 sm:px-6 py-3 rounded-xl text-sm font-bold uppercase tracking-widest transition-colors duration-300 min-w-[80px] sm:min-w-[110px] text-center ${tier === t.id ? 'text-black' : 'text-gray-500 hover:text-gray-300'}`}
               >
                 {tier === t.id && (
                   <motion.div
@@ -1906,8 +1880,32 @@ function Footer() {
           <div>
             <p className="text-yellow-400 font-bold text-sm uppercase tracking-widest mb-4">Quick Links</p>
             <ul className="space-y-2">
-              {['BMI Calculator', 'Pricing Plans', 'Achievements', 'Testimonials', 'Quote of the Day'].map(l => (
-                <li key={l}><a href="#" className="text-gray-500 hover:text-white text-sm transition-colors">{l}</a></li>
+              {[
+                { label: 'BMI Calculator', href: '#bmi' },
+                { label: 'Pricing Plans', href: '#pricing' },
+                { label: 'Achievements', href: '#achievements' },
+                { label: 'Testimonials', href: '#testimonials' },
+                { label: 'Quote of the Day', href: '#scratch' }
+              ].map(l => (
+                <li key={l.label}>
+                  <a
+                    href={l.href}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      const target = document.querySelector(l.href);
+                      if (target) {
+                        const targetPosition = target.getBoundingClientRect().top + window.scrollY;
+                        window.scrollTo({
+                          top: targetPosition - 80,
+                          behavior: 'smooth'
+                        });
+                      }
+                    }}
+                    className="text-gray-500 hover:text-white text-sm transition-colors"
+                  >
+                    {l.label}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
@@ -1936,7 +1934,6 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-[#111111]">
-      <CustomCursor />
       <Navbar />
       <Hero />
       <BMICalculator />
