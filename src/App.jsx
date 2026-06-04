@@ -18,6 +18,8 @@ import transform4Left from './transform_images/transform_4(left).webp';
 import transform4Right from './transform_images/transform_4(right).webp';
 import transform5Left from './transform_images/transform_5(left).webp';
 import transform5Right from './transform_images/transform_5(right).webp';
+import transform6Left from './transform_images/transform_6(left).webp';
+import transform6Right from './transform_images/transform_6(right).webp';
 
 import coachBasith from './Coach_images/Basith.webp';
 import coachSabarikanth from './Coach_images/Sabarikanth.webp';
@@ -93,50 +95,54 @@ const QUOTES = [
 
 const TRANSFORMATIONS = [
   {
-    name: "Arjun R.",
-    months: 6,
-    kgLost: 22,
+    name: "Mohan RajaManikam",
+    months: 3,
+    kgLost: 14,
     label: "Fat → Fit",
     beforeImg: transform1Left,
     afterImg: transform1Right
   },
   {
-    name: "Priya M.",
-    months: 4,
-    kgLost: 14,
-    label: "Slim → Strong",
+    name: "Vignesh Kumar ",
+    months: 2,
+    kgLost: 9,
+    label: "Fat → Fit",
     beforeImg: transform2Left,
     afterImg: transform2Right
   },
   {
-    name: "Rahul S.",
-    months: 8,
-    kgLost: 28,
-    label: "Obese → Athletic",
+    name: "Bhashini",
+    months: 5,
+    kgLost: 12,
+    label: "Fat → Athletic",
     beforeImg: transform3Left,
     afterImg: transform3Right
   },
   {
-    name: "Sneha K.",
-    months: 5,
+    name: "Rajesh",
+    months: 6,
     kgLost: 18,
-    label: "Unfit → Toned",
+    label: "Fat → Model",
     beforeImg: transform4Left,
     afterImg: transform4Right
   },
   {
-    name: "Vikram T.",
-    months: 3,
-    kgLost: 10,
+    name: "Imran Farith",
+    months: 5,
+    kgGain: 6,
     label: "Soft → Shredded",
     beforeImg: transform5Left,
     afterImg: transform5Right
   },
-  { name: "Ananya P.", months: 7, kgLost: 20, label: "Lazy → Lean" },
-  { name: "Karan D.", months: 6, kgLost: 24, label: "Bulky → Built" },
-  { name: "Meera L.", months: 5, kgLost: 16, label: "Weak → Warrior" },
+  {
+    name: "Muhammad Younus A",
+    months: 13,
+    kgLost: 41,
+    label: "Fat → Lean",
+    beforeImg: transform6Left,
+    afterImg: transform6Right
+  }
 ];
-
 const PLANS = [
   {
     label: "1 Month",
@@ -551,7 +557,9 @@ function TransformCard({ t }) {
             <p className="text-gray-400 text-xs">{t.label}</p>
           </div>
           <div className="text-right">
-            <p className="text-yellow-400 font-bold text-sm">-{t.kgLost} kg</p>
+            <p className="text-yellow-400 font-bold text-sm">
+              {t.kgLost ? `-${t.kgLost} kg` : t.kgGain ? `+${t.kgGain} kg` : ''}
+            </p>
             <p className="text-gray-500 text-xs">{t.months} months</p>
           </div>
         </div>
@@ -1616,7 +1624,7 @@ function Hero() {
         <motion.h1 initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, type: "spring", damping: 20 }}
           className="font-display text-[5rem] md:text-[8rem] lg:text-[10rem] leading-[0.85] tracking-tight mb-8">
           <motion.span
-            className="text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-100 to-yellow-500 bg-[length:200%_auto] block"
+            className="text-transparent bg-clip-text bg-gradient-to-r from-white via-yellow-100 to-yellow-500 bg-[length:200%_auto] block font-semibold"
             animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
             transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
           >
@@ -1628,7 +1636,7 @@ function Hero() {
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               exit={{ opacity: 0, y: -30, rotateX: 90 }}
               transition={{ duration: 0.5, type: 'spring' }}
-              className="text-yellow-400 inline-block drop-shadow-[0_0_40px_rgba(255,215,0,0.3)]"
+              className="text-yellow-400 inline-block drop-shadow-[0_0_40px_rgba(255,215,0,0.3)] font-semibold text-[3rem] xs:text-[3.8rem] sm:text-[5rem] md:text-[8rem] lg:text-[10rem]"
               style={{ perspective: 1000, display: 'inline-block' }}>
               {words[wordIdx]}
             </motion.span>
